@@ -3,26 +3,29 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # This pipeline will run when you push to the main branch.
+      - main  # Run pipeline on push to main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # The machine where the job will run.
+    runs-on: ubuntu-latest  # Runner machine
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Checks out the repository's code to the runner.
+        uses: actions/checkout@v2  # Get the code
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2  # Set up the Node.js environment.
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2  # Setup Terraform CLI
         with:
-          node-version: '14'  # Use Node.js version 14.
+          terraform_version: 1.6.0
 
-      - name: Install dependencies
-        run: npm install  # Install the Node.js dependencies.
+      - name: Terraform Init
+        run: terraform init
 
-      - name: Run tests
-        run: npm test  # Run your tests (if you have any).
+      - name: Terraform Validate
+        run: terraform validate
 
-      - name: Build project
-        run: npm run build  # Build your project (if applicable).
+      - name: Terraform Plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
