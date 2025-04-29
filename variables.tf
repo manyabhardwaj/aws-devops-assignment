@@ -1,4 +1,4 @@
-variabl "peerhire-key" {
+variable "peerhire-key" {
   description = "Name of the key pair to use for EC2"
   type        = string
 }
