@@ -1,9 +1,9 @@
-variable "peerhire-key" {
-  description = "Name of the key pair to use for EC2"
-  type        = string
+variable "key_name" {
+  description = "Name of the EC2 Key Pair"
+  default     = "peerhire-key"
 }
 
-variable "mybucket-manya123" {
-  description = "S3 bucket name"
-  type        = string
+variable "bucket_name" {
+  description = "Name of the S3 bucket"
+  default     = "mybucket-manya123"
 }
